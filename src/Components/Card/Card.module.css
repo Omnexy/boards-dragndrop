@@ -1,0 +1,7 @@
+.Card {
+    width: 95%;
+    border: 1px solid black;
+    margin: 10px 0 0 0;
+    cursor: grab;
+    transition: transform 2s ease;
+}

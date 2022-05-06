@@ -1,6 +1,6 @@
 import {IBoard, ICard} from "../Interfaces/Interfaces";
 
-export const boardList: IBoard[] = [
+export const defaultBoards: IBoard[] = [
     {id: 1, order:1, name: 'Доска 1', cards: [
             {id:1, board: 1, order:1, text: 'Карта 1'},
             {id:2, board: 1, order:2, text: 'Карта 2'},
