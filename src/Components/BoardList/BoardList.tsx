@@ -3,6 +3,7 @@ import {IBoard, ICard} from "../../Interfaces/Interfaces";
 import {defaultBoards, initialBoard, initialCard} from "../../Constants/constants";
 import classes from './BoardList.module.css';
 import Board from "../Board/Board";
+import CardCreator from "../CardCreator/CardCreator";
 
 const BoardList:FC = () => {
 
@@ -101,6 +102,7 @@ const BoardList:FC = () => {
 
     return (
         <div className={classes.BoardList}>
+            <CardCreator/>
             <button onClick={() => {
                                     for(let b = 0; b < boardList.length; b++) {
                                         console.log(boardList[b].cards);

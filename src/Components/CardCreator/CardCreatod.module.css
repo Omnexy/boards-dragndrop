@@ -1,0 +1,25 @@
+
+
+.bg {
+    position: fixed;
+    left: 0;
+    background: rgba(0, 0, 0, 0.78);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardForm {
+    width: 500px;
+    height: 300px;
+    padding: 20px;
+    background: rgba(229, 173, 68, 0.89);
+    border: 1px solid teal;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
