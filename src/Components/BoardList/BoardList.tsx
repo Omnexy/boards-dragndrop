@@ -7,7 +7,6 @@ import Board from "../Board/Board";
 const BoardList:FC = () => {
 
     const [boardList, setBoardList] = useState<IBoard[]>([])
-
     const [curBoard, setCurBoard] = useState<IBoard>(initialBoard)
     const [curCard, setCurCard] = useState<ICard>(initialCard)
 
@@ -19,8 +18,6 @@ const BoardList:FC = () => {
         setCurBoard(board);
         setCurCard(card);
     }
-
-
 
     function onDropHandler(e: React.DragEvent<HTMLDivElement>, card: ICard, board: IBoard) {
         e.stopPropagation();
@@ -102,23 +99,28 @@ const BoardList:FC = () => {
         }))
     }
 
-
-
     return (
         <div className={classes.BoardList}>
             <button onClick={() => {
-                for(let b = 0; b < boardList.length; b++) {
-                    console.log(boardList[b].cards);
-                }
-                console.log('======')
-            }
-            }
+                                    for(let b = 0; b < boardList.length; b++) {
+                                        console.log(boardList[b].cards);
+                                    }
+                                    console.log('======')
+                                }
+                            }
             >
                 push
             </button>
             {boardList.map(b => {
                 return (
-                    <Board key={b.id} board={b} curCard={curCard} boardDrop={boardOnDrop} cardDrop={onDropHandler} cardDragStart={dragStartHandler}/>
+                    <Board
+                        key={b.id}
+                        board={b}
+                        curCard={curCard}
+                        boardDrop={boardOnDrop}
+                        cardDrop={onDropHandler}
+                        cardDragStart={dragStartHandler}
+                    />
                 )
             })
 

@@ -32,11 +32,19 @@ const Board:FC<BoardProps> = ({board, curCard, boardDrop, cardDrop, cardDragStar
             onDragOver={e => boardOverHandler(e)}
             onDragLeave={e => boardLeaveHandler(e)}
         >
-            <div className={classes.Board__Header}>{board.name}</div>
+            <div className={classes.Board__Header}>
+                {board.name}
+            </div>
             <div className={classes.Board__CardList}>
                 {board.cards.sort(cardSort).map(c => {
                     return (
-                        <Card key={c.id} board={board} card={c} cardDrop={cardDrop} cardDragStart={cardDragStart}/>
+                        <Card
+                            key={c.id}
+                            board={board}
+                            card={c}
+                            cardDrop={cardDrop}
+                            cardDragStart={cardDragStart}
+                        />
                     )
                 })}
             </div>
