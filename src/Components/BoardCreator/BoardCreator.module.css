@@ -1,5 +1,5 @@
 
-.cardForm {
+.BoardForm {
     width: 500px;
     height: 300px;
     padding: 20px;
@@ -10,16 +10,4 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.cardText {
-
-}
-
-.setBoard {
-
-}
-
-.applyBtn {
-
 }

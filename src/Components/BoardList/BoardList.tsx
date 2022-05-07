@@ -4,14 +4,18 @@ import {defaultBoards, initialBoard, initialCard} from "../../Constants/constant
 import classes from './BoardList.module.css';
 import Board from "../Board/Board";
 import CardCreator from "../CardCreator/CardCreator";
+import MyModal from "../UI/MyModal/MyModal";
+import BoardCreator from "../BoardCreator/BoardCreator";
 
 const BoardList:FC = () => {
 
     const [boardList, setBoardList] = useState<IBoard[]>([])
     const [curBoard, setCurBoard] = useState<IBoard>(initialBoard)
     const [curCard, setCurCard] = useState<ICard>(initialCard)
-    const [showCreator, setShowCreator] = useState<boolean>(false)
+    const [showCardCreator, setShowCardCreator] = useState<boolean>(false)
+    const [showBoardCreator, setShowBoardCreator] = useState<boolean>(false)
     const [cardIdCount, setCardIdCount] = useState<number>(0)
+    const [boardIdCount, setBoardIdCount] = useState<number>(0)
 
     useEffect(()=> {
         setBoardList(defaultBoards);
@@ -102,18 +106,53 @@ const BoardList:FC = () => {
         }))
     }
 
+    function dragOverDelete(e: React.DragEvent<HTMLDivElement>) {
+        e.preventDefault();
+        e.currentTarget.style.opacity = '1';
+    }
+
+    function dragLeaveDelete(e: React.DragEvent<HTMLDivElement>) {
+        e.preventDefault();
+        e.currentTarget.style.opacity = '0';
+    }
+
+    function onDropDelete(e: React.DragEvent<HTMLDivElement>, card: ICard) {
+        e.currentTarget.style.opacity = '0';
+
+        setBoardList(boardList.map(b => {
+            if(b.id === curBoard.id) {
+                let spliced:ICard[] = b.cards;
+                spliced.splice(spliced.indexOf(card), 1);
+                return {...b, cards: spliced};
+            }
+            return b;
+        }))
+    }
+
     return (
         <div className={classes.BoardList__root}>
-            <div className={classes.BoardList}>
-                {showCreator && <CardCreator
-                    showCreator={showCreator}
-                    setShowCreator={setShowCreator}
+
+            <MyModal headerText='CardCreator' showModal={showCardCreator} setShowModal={setShowCardCreator}>
+                <CardCreator
+                    setShowCreator={setShowCardCreator}
                     boardList={boardList}
                     setBoardList={setBoardList}
                     cardIdCount={cardIdCount}
                     setCardIdCount={setCardIdCount}
                 />
-                }
+            </MyModal>
+
+            <MyModal headerText='BoardCreator' showModal={showBoardCreator} setShowModal={setShowBoardCreator}>
+                <BoardCreator
+                    boardList={boardList}
+                    setBoardList={setBoardList}
+                    setShowCreator={setShowBoardCreator}
+                    boardIdCount={boardIdCount}
+                    setBoardIdCount={setBoardIdCount}
+                />
+            </MyModal>
+
+            <div className={classes.BoardList}>
                 <button onClick={() => {
                     for(let b = 0; b < boardList.length; b++) {
                         console.log(boardList[b].cards);
@@ -122,7 +161,10 @@ const BoardList:FC = () => {
                 }
                 }
                 >
-                    push
+                    Крякнуть в консоль
+                </button>
+                <button onClick={() => setShowBoardCreator(true)}>
+                    Добавить доску
                 </button>
                 {boardList.map(b => {
                     return (
@@ -139,7 +181,18 @@ const BoardList:FC = () => {
 
                 }
             </div>
-            <button onClick={()=>setShowCreator(true)}>Добавить карточку</button>
+            {boardList.length > 0 &&
+                <button onClick={()=>setShowCardCreator(true)}>Добавить карточку</button>
+            }
+            <div
+                className={classes.DeleteBox}
+                onDragOver={e => dragOverDelete(e)}
+                onDragEnd={e => dragLeaveDelete(e)}
+                onDragLeave={e => dragLeaveDelete(e)}
+                onDrop={e => onDropDelete(e, curCard)}
+            >
+                Удалить
+            </div>
         </div>
     );
 };

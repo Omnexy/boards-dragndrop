@@ -46,3 +46,22 @@
     align-items: center;
     overflow-y: auto;
 }
+
+.DeleteBox {
+    position: fixed;
+    width: 50vw;
+    height: 50px;
+    left: 25vw;
+    bottom: 10vh;
+    border: 2px dashed darkred;
+    border-radius: 10px;
+    color: darkred;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*.DeleteBox:hover {
+    opacity: 1;
+}*/
