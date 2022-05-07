@@ -10,6 +10,8 @@ const BoardList:FC = () => {
     const [boardList, setBoardList] = useState<IBoard[]>([])
     const [curBoard, setCurBoard] = useState<IBoard>(initialBoard)
     const [curCard, setCurCard] = useState<ICard>(initialCard)
+    const [showCreator, setShowCreator] = useState<boolean>(false)
+    const [cardIdCount, setCardIdCount] = useState<number>(0)
 
     useEffect(()=> {
         setBoardList(defaultBoards);
@@ -101,32 +103,43 @@ const BoardList:FC = () => {
     }
 
     return (
-        <div className={classes.BoardList}>
-            <CardCreator/>
-            <button onClick={() => {
-                                    for(let b = 0; b < boardList.length; b++) {
-                                        console.log(boardList[b].cards);
-                                    }
-                                    console.log('======')
-                                }
-                            }
-            >
-                push
-            </button>
-            {boardList.map(b => {
-                return (
-                    <Board
-                        key={b.id}
-                        board={b}
-                        curCard={curCard}
-                        boardDrop={boardOnDrop}
-                        cardDrop={onDropHandler}
-                        cardDragStart={dragStartHandler}
-                    />
-                )
-            })
+        <div className={classes.BoardList__root}>
+            <div className={classes.BoardList}>
+                {showCreator && <CardCreator
+                    showCreator={showCreator}
+                    setShowCreator={setShowCreator}
+                    boardList={boardList}
+                    setBoardList={setBoardList}
+                    cardIdCount={cardIdCount}
+                    setCardIdCount={setCardIdCount}
+                />
+                }
+                <button onClick={() => {
+                    for(let b = 0; b < boardList.length; b++) {
+                        console.log(boardList[b].cards);
+                    }
+                    console.log('======')
+                }
+                }
+                >
+                    push
+                </button>
+                {boardList.map(b => {
+                    return (
+                        <Board
+                            key={b.id}
+                            board={b}
+                            curCard={curCard}
+                            boardDrop={boardOnDrop}
+                            cardDrop={onDropHandler}
+                            cardDragStart={dragStartHandler}
+                        />
+                    )
+                })
 
-            }
+                }
+            </div>
+            <button onClick={()=>setShowCreator(true)}>Добавить карточку</button>
         </div>
     );
 };
