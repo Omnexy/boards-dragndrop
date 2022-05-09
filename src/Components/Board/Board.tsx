@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {IBoard, ICard} from "../../Interfaces/Interfaces";
-import classes from "../BoardList/BoardList.module.css";
+import classes from './Board.module.css';
 import {cardSort} from "../../Utils/utils";
 import Card from "../Card/Card";
 

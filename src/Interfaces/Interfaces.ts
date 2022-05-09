@@ -12,3 +12,8 @@ export interface IBoard {
     name: string;
     cards: ICard[];
 }
+
+export interface IRoute {
+    path: string;
+    element: React.ComponentType;
+}

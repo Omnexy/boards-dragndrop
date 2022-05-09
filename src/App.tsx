@@ -1,17 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
-import BoardList from "./Components/BoardList/BoardList";
+import AppRouter from "./Components/AppRouter/AppRouter";
 
 
 function App() {
 
-    useEffect(() => {
-        document.title = 'Мой канбан';
-    }, [])
-
     return (
         <div className="App">
-            <BoardList/>
+            <AppRouter/>
         </div>
     );
 }

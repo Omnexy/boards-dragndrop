@@ -151,21 +151,20 @@ const BoardList:FC = () => {
                     setBoardIdCount={setBoardIdCount}
                 />
             </MyModal>
-
+            <button onClick={() => {
+                for(let b = 0; b < boardList.length; b++) {
+                    console.log(boardList[b].cards);
+                }
+                console.log('======')
+            }
+            }
+            >
+                Крякнуть в консоль
+            </button>
+            <button onClick={() => setShowBoardCreator(true)}>
+                Добавить доску
+            </button>
             <div className={classes.BoardList}>
-                <button onClick={() => {
-                    for(let b = 0; b < boardList.length; b++) {
-                        console.log(boardList[b].cards);
-                    }
-                    console.log('======')
-                }
-                }
-                >
-                    Крякнуть в консоль
-                </button>
-                <button onClick={() => setShowBoardCreator(true)}>
-                    Добавить доску
-                </button>
                 {boardList.map(b => {
                     return (
                         <Board
